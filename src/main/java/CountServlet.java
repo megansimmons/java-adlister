@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 
 public class CountServlet extends HttpServlet {
 
-        int count = 0;
+    int count = 0;
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         count++;
 
