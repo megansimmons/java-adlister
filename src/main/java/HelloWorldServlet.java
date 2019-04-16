@@ -7,11 +7,11 @@ import java.io.PrintWriter;
 
 
 
-@WebServlet(urlPatterns = "/hello-world")
+@WebServlet(urlPatterns = "/hello")
 
 public class HelloWorldServlet extends HttpServlet {
 
-    @Override
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 //        System.out.println("This works");
