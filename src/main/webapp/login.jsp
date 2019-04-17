@@ -2,6 +2,20 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%--walkthrough notes
+
+<%
+    if(request.getMethod().toLowerCase().equals("post")){
+
+        String username = request.getParameter("username");
+        String password = request.getParameter("pass");
+        if(username.toLowerCase().equals("admin") && password.equals("password")) {
+            response.sendRedirect("profile.jsp");
+        }
+    }
+
+%>
+--%>
 
 
 <% if(request.getParameter("username") != null && request.getParameter("password") != null) {
@@ -13,7 +27,7 @@
 <html>
 <head>
     <title>Title</title>
-    <%@ include file ="partials/bootstrap.jsp"%>
+    <%@ include file ="partials/head.jsp"%>
 </head>
 <body>
     <%@ include file="partials/navbar.jsp" %>
