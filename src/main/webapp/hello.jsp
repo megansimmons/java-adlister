@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%! int counter = 0; %>
-<% counter += 1; %>
-<% String name = "Zion"; %>
+<%--<%! int counter = 0; %>--%>
+<%--<% counter += 1; %>--%>
+<%--<% String name = "Zion"; %>--%>
 <% String dog = "Woof"; %>
 <% String cat= "Hiss"; %>
 <% int[] numbers = {7,13,713, 317, 31, 7}; %>
@@ -19,8 +19,8 @@ import java.util.ArrayList;
 </head>
 <body>
 <%@ include file="partials/navbar.jsp"%>
-<h1>The current count is <%= counter %>.</h1>
-<h2 class = "text-danger">Hello <%=name %>!!</h2>
+<h1>The current count is ${count}.</h1>
+<h2 class = "text-danger">Hello ${name}!!</h2>
 <h1>Welcome To The Site!</h1>
 <p>Path: <%= request.getRequestURL() %></p>
 <p>Query String: <%= request.getQueryString() %></p>
@@ -43,6 +43,8 @@ import java.util.ArrayList;
         <p>none of the above tests were true</p>
     </c:otherwise>
 </c:choose>
+
+<p>You have viewed this page ${counter} times.</p>
 
 <% List<String> list = new ArrayList<String>();
 list.add("Hello");
