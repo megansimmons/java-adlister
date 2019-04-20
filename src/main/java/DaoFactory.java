@@ -1,4 +1,4 @@
-public class DaoFactory {
+/*public class DaoFactory {
 
     private static Cats catsDao;
     public static Cats getCatsDao() {
@@ -15,4 +15,4 @@ public class DaoFactory {
     }
 
 
-}
+}*/
