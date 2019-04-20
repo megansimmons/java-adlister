@@ -20,7 +20,7 @@
 
 <% if(request.getParameter("username") != null && request.getParameter("password") != null) {
     if (request.getParameter("username").equals("admin") && request.getParameter("password").equals("password")) {
-        response.sendRedirect("profile.jsp");
+        response.sendRedirect("/profile.jsp");
     }
 }; %>
 
