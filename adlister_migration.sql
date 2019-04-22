@@ -2,9 +2,9 @@ USE adlister_db;
 
 CREATE TABLE users (
   id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  username VARCHAR(100),
-  email VARCHAR(100),
-  password VARCHAR(100),
+  username VARCHAR(100) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
   PRIMARY KEY(id)
 );
 

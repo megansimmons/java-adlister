@@ -26,7 +26,7 @@ public class JDBCTest {
 
             stmt.executeUpdate("INSERT INTO users(username, email, password) values('"+username+"', '"+email+"', '"+password+"')");
             //could aslo do the same thing with the following
-            stmt.executeUpdate(String.format("INSERT INTO users(username, email, password,) values('%s', '%s', '%s')", username, email, password));
+//            stmt.executeUpdate(String.format("INSERT INTO users(username, email, password,) values('%s', '%s', '%s')", username, email, password));
 
 
             ResultSet rs = stmt.executeQuery("SELECT * FROM users");

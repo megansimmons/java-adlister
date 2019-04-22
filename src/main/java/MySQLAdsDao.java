@@ -3,61 +3,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
+import com.mysql.cj.jdbc.Driver;
 
 public class MySQLAdsDao implements Ads{
 
     private List<Ad> ads = new ArrayList<>();
     private Connection connection;
 
-    public MySQLAdsDao(List<Ad> ads, Connection connection, Config config) {
-        this.ads = ads;
-        this.connection = connection;
+    @Override
+    public Long insert(Ad ad) {
+        Long newAdId = -1L;
 
+        String query = String.format("INSERT INTO ads(user_id, title, description) VALUES('%s', '%s', '%s')",
+            ad.getUserId(),
+            ad.getTitle(),
+            ad.getDescription());
+
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                System.out.println("Inserted a new record: New ID: " +rs.getLong(1));
+                newAdId = rs.getLong(1);
+            }
+        }catch(SQLException e){
+            System.out.println("Problem connecting to database for adding new ad.");
+            System.out.println(e);
+        }
+    return newAdId;
+    }
+
+    public MySQLAdsDao(Config config) {
+        try {
+            DriverManager.registerDriver(new Driver());
+            connection = DriverManager.getConnection(
+                    config.getUrl(),
+                    config.getUser(),
+                    config.getPassword()
+            );
+        }catch(SQLException e) {
+            System.out.println(e);
+        }
     }
 
     public  List<Ad> all() {
-        try {
-            DriverManager.registerDriver(new Driver() {
-                @Override
-                public Connection connect(String url, Properties info) throws SQLException {
-                    return null;
-                }
 
-                @Override
-                public boolean acceptsURL(String url) throws SQLException {
-                    return false;
-                }
-
-                @Override
-                public DriverPropertyInfo[] getPropertyInfo(String url, Properties info) throws SQLException {
-                    return new DriverPropertyInfo[0];
-                }
-
-                @Override
-                public int getMajorVersion() {
-                    return 0;
-                }
-
-                @Override
-                public int getMinorVersion() {
-                    return 0;
-                }
-
-                @Override
-                public boolean jdbcCompliant() {
-                    return false;
-                }
-
-                @Override
-                public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-                    return null;
-                }
-            });
-            Connection connection = DriverManager.getConnection(
-                    Config.getUrl(),
-                    Config.getUser(),
-                    Config.getPassword()
-            );
+        try{
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
 
@@ -79,5 +71,13 @@ public class MySQLAdsDao implements Ads{
         return ads;
     }
 
+    public static void main(String[] args) {
 
+//            MySQLAdsDao dao = new MySQLAdsDao(new Config());
+//            dao.insert(new Ad(1,"JDBC Ad", "ad created in Java"));
+//            for(Ad ad : dao.all()) {
+//                System.out.println(ad.getTitle());
+//            }
+
+    }
 }
